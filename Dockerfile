@@ -12,7 +12,7 @@ RUN apt-get install git -y
 
 RUN git clone https://github.com/NaveenRayapati/cloudbuild.git
 
-COPY /naveen/cloudbuild/index.html /usr/share/nginx/html
+COPY cloudbuild/index.html /usr/share/nginx/html
 
 EXPOSE 80
 

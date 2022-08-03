@@ -13,6 +13,6 @@ apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
  name: qsdev
-description: development cluster
+description: development clusters
 gke:
  cluster:  projects/cloudside-academy/locations/asia-east1-a/clusters/cluster-2

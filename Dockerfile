@@ -10,9 +10,10 @@ RUN apt-get install nginx -y
 
 RUN apt-get install git -y
 
-RUN git clone https://github.com/NaveenRayapati/cloudbuild.git
 
-COPY cloudbuild/index.html /usr/share/nginx/html
+RUN git clone https://github.com/NaveenRayapati/cloudbuild.git /naveen
+
+COPY /naveen/cloudbuild/index.html /usr/share/nginx/html/
 
 EXPOSE 80
 

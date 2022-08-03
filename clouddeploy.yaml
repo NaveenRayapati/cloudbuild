@@ -15,4 +15,4 @@ metadata:
  name: qsdev
 description: development cluster
 gke:
- cluster:  projects/cloudside-academy/locations/asia-south1-a/clusters/cluster-1
+ cluster:  projects/cloudside-academy/locations/asia-east1-a/clusters/cluster-2

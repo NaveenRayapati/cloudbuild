@@ -1,4 +1,4 @@
-# Build and tag using commit sha
+# Build and tag usiing sha
 
 steps:
 

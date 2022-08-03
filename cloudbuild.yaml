@@ -20,7 +20,7 @@ steps:
     [
       "deploy", "releases", "create", "rel-${SHORT_SHA}",
       "--delivery-pipeline", "gitops",
-      "--region", "asia-south1",
+      "--region", "asia-east1",
       "--annotations", "commitId=${REVISION_ID}",
       "--images", "cloudbuild=gcr.io/cloudside-academy/github.com/naveenrayapati/cloudbuild:${COMMIT_SHA}"
     ]

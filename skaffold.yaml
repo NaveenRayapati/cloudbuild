@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: git-ops
+build:
+  artifacts:gcr.io/cloudside-academy/github.com/naveenrayapati/cloudbuild:9c966475cad1d5b479101d1219a6611e43e7ebf5
+  - image: 
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yaml

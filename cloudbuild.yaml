@@ -25,6 +25,8 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
+options:
+  logging: CLOUD_LOGGING_ONLY
 
 images:
   - 'us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/my-app:$SHORT_SHA'

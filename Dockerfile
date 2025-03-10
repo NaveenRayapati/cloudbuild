@@ -1,19 +1,18 @@
-FROM ubuntu
+# Use an official Node.js runtime as a parent image
+FROM node:20-alpine
 
-MAINTAINER naveenrayapati538@gmail.com
+# Set the working directory
+WORKDIR /app
 
-WORKDIR /naveen
+# Copy package.json and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install --production
 
-RUN apt-get update
+# Copy the rest of the application code
+COPY . .
 
-RUN apt-get install nginx -y
+# Expose the application port
+EXPOSE 8080
 
-RUN apt-get install git -y
-
-RUN git clone https://github.com/NaveenRayapati/cloudbuild.git /naveen
-
-RUN cp -rf /naveen/index.html /usr/share/nginx/html/
-
-EXPOSE 80
-
-CMD service nginx start
+# Run the application
+CMD ["node", "server.js"]

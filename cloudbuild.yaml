@@ -17,12 +17,18 @@ steps:
       - gcloud
       - functions
       - deploy
-      - my-function
+      - my-cloud-run-function
       - --region=us-central1
-      - --source=.
-      - --trigger-http
+      - --gen2
       - --runtime=nodejs20
-
+      - --trigger-http
+      - --allow-unauthenticated
+      - --entry-point=YOUR_FUNCTION_NAME
+      - --source=us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/cloud-run-function
+      - --memory=512MB
+      - --timeout=60s
+      - --max-instances=3
+      
 options:
   logging: CLOUD_LOGGING_ONLY
 

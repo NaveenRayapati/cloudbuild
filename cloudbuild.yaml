@@ -12,22 +12,17 @@ steps:
     ]
 
   # 3. Deploy to Cloud Run
+  
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     args:
       - gcloud
       - functions
       - deploy
-      - my-cloud-run-function
+      - test-function
       - --region=us-central1
-      - --gen2
-      - --runtime=nodejs20
+      - --source=.
       - --trigger-http
-      - --allow-unauthenticated
-      - --entry-point=YOUR_FUNCTION_NAME
-      - --source=us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/cloud-run-function
-      - --memory=512MB
-      - --timeout=60s
-      - --max-instances=3
+      - --runtime=nodejs20
       
 options:
   logging: CLOUD_LOGGING_ONLY

@@ -13,18 +13,16 @@ steps:
 
   # 3. Deploy to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
     args:
-      - 'run'
-      - 'deploy'
-      - 'my-cloud-run-service'
-      - '--image'
-      - 'us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/my-app:$SHORT_SHA'
-      - '--region'
-      - 'us-central1'
-      - '--platform'
-      - 'managed'
-      - '--allow-unauthenticated'
+      - gcloud
+      - functions
+      - deploy
+      - my-function
+      - --region=us-central1
+      - --source=.
+      - --trigger-http
+      - --runtime=nodejs20
+
 options:
   logging: CLOUD_LOGGING_ONLY
 

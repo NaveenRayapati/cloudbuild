@@ -4,9 +4,10 @@ FROM node:20-alpine
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json (if it exists) and install dependencies
-COPY package.json package-lock.json ./
+# Copy only package.json (package-lock.json is optional)
+COPY package.json ./
 
+# Install dependencies if package.json exists
 RUN if [ -f package.json ]; then npm install --production; fi
 
 # Copy the rest of the application code

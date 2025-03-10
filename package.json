@@ -1,0 +1,10 @@
+{
+  "name": "cloud-function-app",
+  "version": "1.0.0",
+  "description": "A Cloud Run Function deployed using a Docker container",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}

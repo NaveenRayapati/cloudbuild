@@ -4,10 +4,13 @@ FROM node:20-alpine
 # Set the working directory
 WORKDIR /app
 
-# Skip copying package.json if it doesn't exist
-# Install dependencies only if they exist
-COPY . .
+# Copy package.json (if it exists) and install dependencies
+COPY package.json package-lock.json ./
+
 RUN if [ -f package.json ]; then npm install --production; fi
+
+# Copy the rest of the application code
+COPY . .
 
 # Expose the application port
 EXPOSE 8080

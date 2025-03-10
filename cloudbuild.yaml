@@ -1,26 +1,30 @@
-# Build and tag usiing sha
-
 steps:
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '.', '-t', 'gcr.io/cloudside-academy/github.com/naveenrayapati/cloudbuild:${COMMIT_SHA}', '-f', 'Dockerfile']
-
-
-# Push the container image
-
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/cloudside-academy/github.com/naveenrayapati/cloudbuild:${COMMIT_SHA}']
-# Create release in Google Cloud Deploy
-
-
-- name: gcr.io/google.com/cloudsdktool/cloud-sdk
-  entrypoint: gcloud
-  args:
-    [
-      "deploy", "releases", "create", "rel-${SHORT_SHA}",
-      "--delivery-pipeline", "gitops",
-      "--region", "asia-east1",
-      "--annotations", "commitId=${REVISION_ID}",
-      "--images", "cloudbuild=gcr.io/cloudside-academy/github.com/naveenrayapati/cloudbuild:${COMMIT_SHA}"
+  # 1. Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build', '-t', 'us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/my-app:$SHORT_SHA', '.'
     ]
+
+  # 2. Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push', 'us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/my-app:$SHORT_SHA'
+    ]
+
+  # 3. Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'my-cloud-run-service'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/my-app:$SHORT_SHA'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+images:
+  - 'us-central1-docker.pkg.dev/cloudside-academy/test-nav-repo/my-app:$SHORT_SHA'
